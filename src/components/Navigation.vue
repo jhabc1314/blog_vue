@@ -15,19 +15,28 @@
 
     <v-spacer></v-spacer>
     <div class="hidden-sm-and-down mx-5">
-      <v-btn text href="/">Home</v-btn>
-      <v-btn text href="/posts">Posts</v-btn>
+      <router-link to="/">
+        <v-btn text>Home</v-btn>
+      </router-link>
+      <router-link to="/about">
+        <v-btn text>Posts</v-btn>
+      </router-link>
     </div>
-    <v-menu offset-y >
-      <template  v-slot:activator="{on,attrs}">
+    <v-menu offset-y>
+      <template v-slot:activator="{on,attrs}">
         <v-app-bar-nav-icon class="hidden-md-and-up" v-bind="attrs" v-on="on"></v-app-bar-nav-icon>
       </template>
       <v-list>
-        <v-list-item href="/home">
-          <v-list-item-title>Home</v-list-item-title>
+        <v-list-item>
+          <router-link to="/">
+            <v-list-item-title>Home</v-list-item-title>
+          </router-link>
         </v-list-item>
-        <v-list-item href="/posts">
-          <v-list-item-title>Posts</v-list-item-title>
+
+        <v-list-item>
+          <router-link to="/about">
+            <v-list-item-title>About</v-list-item-title>
+          </router-link>
         </v-list-item>
       </v-list>
     </v-menu>
