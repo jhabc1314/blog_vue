@@ -1,28 +1,37 @@
 <template>
-  <div id="app">
+  <v-app>
+    <Navigation />
+    <v-main>
+      
+      <v-container >
+      <Carousels url="http://v2.chelun.com/V2/index" />
+      <PostsCards />
+      </v-container>
+      <Footer/>
+    </v-main>
     
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
-  </div>
+  </v-app>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
+import Navigation from "./components/Navigation";
+import Carousels from "./components/Carousels";
+import PostsCards from "./components/PostsCards";
+import Footer from "./components/Footer";
+
 
 export default {
   name: "App",
+
   components: {
-    HelloWorld
-  }
+    Navigation,
+    Carousels,
+    PostsCards,
+    Footer
+  },
+
+  data: () => ({
+    //
+  })
 };
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-</style>

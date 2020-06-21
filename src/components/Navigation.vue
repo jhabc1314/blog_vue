@@ -1,28 +1,35 @@
 <template>
-  <el-row>
-    <el-menu
-      :default-active="activeIndex"
-      class="el-menu-demo"
-      mode="horizontal"
-      @select="handleSelect"
-    >
-      <el-menu-item index="1">处理中心</el-menu-item>
-      <el-submenu index="2">
-        <template slot="title">我的工作台</template>
-        <el-menu-item index="2-1">选项1</el-menu-item>
-        <el-menu-item index="2-2">选项2</el-menu-item>
-        <el-menu-item index="2-3">选项3</el-menu-item>
-        <el-submenu index="2-4">
-          <template slot="title">选项4</template>
-          <el-menu-item index="2-4-1">选项1</el-menu-item>
-          <el-menu-item index="2-4-2">选项2</el-menu-item>
-          <el-menu-item index="2-4-3">选项3</el-menu-item>
-        </el-submenu>
-      </el-submenu>
-      <el-menu-item index="3" disabled>消息中心</el-menu-item>
-      <el-menu-item index="4">
-        <a href="https://www.ele.me" target="_blank">订单管理</a>
-      </el-menu-item>
-    </el-menu>
-  </el-row>
+  <v-app-bar app color="primary" dark>
+    <div class="d-flex align-center">
+      <v-img
+        alt="Vuetify Logo"
+        class="shrink mr-2"
+        contain
+        src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
+        transition="scale-transition"
+        width="40"
+      />
+
+      <v-toolbar-title>Jack Dou</v-toolbar-title>
+    </div>
+
+    <v-spacer></v-spacer>
+    <div class="hidden-sm-and-down mx-5">
+      <v-btn text href="/">Home</v-btn>
+      <v-btn text href="/posts">Posts</v-btn>
+    </div>
+    <v-menu offset-y >
+      <template  v-slot:activator="{on,attrs}">
+        <v-app-bar-nav-icon class="hidden-md-and-up" v-bind="attrs" v-on="on"></v-app-bar-nav-icon>
+      </template>
+      <v-list>
+        <v-list-item href="/home">
+          <v-list-item-title>Home</v-list-item-title>
+        </v-list-item>
+        <v-list-item href="/posts">
+          <v-list-item-title>Posts</v-list-item-title>
+        </v-list-item>
+      </v-list>
+    </v-menu>
+  </v-app-bar>
 </template>
