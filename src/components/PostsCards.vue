@@ -1,39 +1,47 @@
 <template>
-    
-      <v-row>
-        <v-col cols="12">
-          <v-card color="#385F73" dark min-height="200" >
-            <v-card-title class="headline">Unlimited music now</v-card-title>
+  <v-row>
+    <v-col cols="12">
+      <v-card color="#385F73" dark min-height="200">
+        <v-card-title class="headline">Unlimited music now</v-card-title>
 
-            <v-card-subtitle>Listen to your favorite artists and albums whenever and wherever, online and offline.</v-card-subtitle>
+        <v-card-subtitle>Listen to your favorite artists and albums whenever and wherever, online and offline.</v-card-subtitle>
 
-            <v-card-actions>
-              <v-btn text>Listen Now</v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-col>
+        <v-card-actions>
+          <v-btn text>Listen Now</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-col>
 
-        <v-col v-for="(item, i) in items" :key="i" cols="12">
-          <v-card :color="item.color" dark min-height="200">
-            <div class="d-flex flex-no-wrap justify-space-between">
-              <div>
-                <v-card-title class="headline" v-text="item.title"></v-card-title>
+    <v-col v-for="(item, i) in items" :key="i" cols="12">
+      <v-card :color="item.color" dark min-height="200">
+        <div class="d-flex flex-no-wrap justify-space-between">
+          <div>
+            <v-card-title class="headline" v-text="item.title"></v-card-title>
 
-                <v-card-subtitle v-text="item.artist"></v-card-subtitle>
-              </div>
+            <v-card-subtitle v-text="item.artist"></v-card-subtitle>
+          </div>
 
-              <v-avatar class="ma-3" size="125" tile>
-                <v-img :src="item.src"></v-img>
-              </v-avatar>
-            </div>
-          </v-card>
-        </v-col>
-      </v-row>
+          <v-avatar class="ma-3" size="125" tile>
+            <v-img :src="item.src"></v-img>
+          </v-avatar>
+        </div>
+      </v-card>
+    </v-col>
+    <v-col cols="12">
+      <v-pagination @input="getPosts" v-model="page" :length="length" circle></v-pagination>
+    </v-col>
+  </v-row>
 </template>
 
 <script>
+import axios from  'axios';
+
 export default {
   data: () => ({
+    page: 1,
+    length: 1, //多少页
+    limit: 10, //每页几条数据
+    url: process.env.VUE_APP_DOMAIN + "/api/home/posts",
     items: [
       {
         color: "#1F7087",
@@ -48,6 +56,27 @@ export default {
         artist: "Ellie Goulding"
       }
     ]
-  })
+  }),
+  mounted: function() {
+    this.getPosts();
+  },
+  methods: {
+    getPosts: function(page = null) {
+      let p = page === null ? this.page : page;
+      console.log(this.url);
+      axios
+        .get(this.url + `?page=${p}&limit=${this.limit}`)
+        .then(res => {
+          console.log(res);
+        })
+        .catch(res => {
+          console.log(res);
+        });
+    }
+  }
 };
 </script>
+
+<style lang="scss">
+@import "@/styles/variables.scss";
+</style>
